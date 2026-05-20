@@ -1,0 +1,52 @@
+# Python cache and local environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Node and package-manager cache
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local credentials and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.credentials.json
+credentials.json
+secrets.json
+token.json
+
+# Cursor and tool temporary outputs
+.cursor/tmp/
+.cursor/cache/
+.cursor/skills/**/tmp/
+.cursor/skills/**/output/
+
+# Local generated review files
+*.xlsx
+*.xlsm
+*.xls
+*.docx
+*.pdf
+
+# OS and editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+
+# Test and runtime logs
+*.log
+logs/
+tmp/
+temp/

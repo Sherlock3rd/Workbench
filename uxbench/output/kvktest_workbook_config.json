@@ -1,0 +1,270 @@
+{
+  "source_image": "D:\\charlie\\Workbencch\\uxbench\\pic\\kvktest.jpg",
+  "source_coordinate_size": [
+    3801,
+    9215
+  ],
+  "output_path": "D:\\charlie\\Workbencch\\uxbench\\output\\kvktest_ux_text_requirements.xlsx",
+  "sheet_title": "KvKTextRequirements",
+  "crop_dir_name": "kvktest_crops",
+  "auto_image_width": true,
+  "max_image_width": 560,
+  "min_image_width": 360,
+  "pixels_per_row": 20,
+  "image_padding_rows": 2,
+  "overview_title": "UI结构总览",
+  "overview_note": "本稿基于 ux-text-requirements-generator 当前默认流程生成。当前工作区仍未提供历史样例表与规则文档，因此以下内容作为首轮测试稿使用；无法稳定识别的文本统一标记为待确认。",
+  "overview_rows": [
+    {
+      "module": "1. 国王技能入口",
+      "pages": "王视角技能页",
+      "notes": "从王视角进入 KVK 技能面板，确认囚禁相关技能入口与激活方式。"
+    },
+    {
+      "module": "2. 囚禁名册主流程",
+      "pages": "囚禁名单空态；搜索总督；囚禁名单激活态",
+      "notes": "核心链路是从空态进入搜索，对目标执行囚禁，再进入已囚禁列表进行查看、定位和解封。"
+    },
+    {
+      "module": "3. 二次确认与后续反馈",
+      "pages": "解封二次确认；KVK 大地图入口页",
+      "notes": "图中包含确认弹窗和地图入口页，但个别正文存在 OCR 风险，需要人工复核。"
+    }
+  ],
+  "sections": [
+    {
+      "title": "王视角-国王技能页",
+      "crop_name": "01_skill_list.jpg",
+      "crop_box": [430, 320, 1810, 1260],
+      "image_note": "【左侧放图】王视角打开国王技能页，可见技能列表、技能名、描述和激活按钮。此页主要用于明确“囚禁”相关技能是否可见以及如何触发。",
+      "rows": [
+        {
+          "note": "页面主标题，用于标识当前为国王技能页。",
+          "key": "LC_KVK_KINGSKILL_PAGE_TITLE",
+          "content": "KING SKILL",
+          "remark": "位置：页面顶部居中。用途：标识技能总页。"
+        },
+        {
+          "note": "囚禁技能名称，作为列表中的可识别技能项。",
+          "key": "LC_KVK_KINGSKILL_CAGE_NAME",
+          "content": "Cage",
+          "remark": "位置：技能列表第二项标题。用途：标识囚禁技能名称。"
+        },
+        {
+          "note": "囚禁技能描述，说明技能效果和限制条件。",
+          "key": "LC_KVK_KINGSKILL_CAGE_DESC",
+          "content": "Specify a city that cannot be moved within 30 minutes. (not available to the king of the union or other kingdoms)",
+          "remark": "位置：Cage 技能标题下方。用途：说明囚禁效果与限制。"
+        },
+        {
+          "note": "技能激活按钮，用于实际触发当前选中技能。",
+          "key": "LC_KVK_KINGSKILL_USE_BUTTON",
+          "content": "USE",
+          "remark": "位置：当前选中技能行右侧。用途：执行技能激活。"
+        }
+      ]
+    },
+    {
+      "title": "囚禁名单-空态",
+      "crop_name": "02_empty_state.jpg",
+      "crop_box": [500, 1650, 1860, 2700],
+      "image_note": "【左侧放图】囚禁名单为空时，页面只展示空态提示和新增操作入口。此页重点在于确认空态提示文案和进入添加流程的按钮文案。",
+      "rows": [
+        {
+          "note": "空态说明文本，用于提示当前没有被囚禁目标。",
+          "key": "LC_KVK_CAPTIVITY_EMPTY_DESC",
+          "content": "There are currently no prisoners",
+          "remark": "位置：页面中部。用途：囚禁列表空态提示。"
+        },
+        {
+          "note": "新增按钮，引导操作者进入搜索或添加囚禁目标的流程。",
+          "key": "LC_KVK_CAPTIVITY_EMPTY_ADD_BUTTON",
+          "content": "ADD",
+          "remark": "位置：页面底部中间。用途：从空态发起新增操作。"
+        }
+      ]
+    },
+    {
+      "title": "搜索总督并执行囚禁",
+      "crop_name": "03_governor_list.jpg",
+      "crop_box": [420, 3000, 1870, 4040],
+      "image_note": "【左侧放图】通过搜索总督进入列表结果页，可查看目标玩家基础信息，并执行查看或囚禁操作。该页是从空态进入主操作链路的核心页面。",
+      "rows": [
+        {
+          "note": "搜索页主标题，用于标识当前处于搜索总督流程。",
+          "key": "LC_KVK_CAPTIVITY_SEARCH_PAGE_TITLE",
+          "content": "SEARCH GOVERNOR",
+          "remark": "位置：列表页顶部。用途：标识搜索目标玩家页面。"
+        },
+        {
+          "note": "搜索输入提示，用于引导输入目标总督名。",
+          "key": "LC_KVK_CAPTIVITY_SEARCH_INPUT_HINT",
+          "content": "Input a governor name to search",
+          "remark": "位置：搜索输入框内。用途：提示输入搜索条件。"
+        },
+        {
+          "note": "列表字段表头，帮助操作者理解结果列表的字段含义。",
+          "key": "LC_KVK_CAPTIVITY_SEARCH_NAME_HEADER",
+          "content": "Name",
+          "remark": "位置：结果列表表头。用途：目标名字字段名。"
+        },
+        {
+          "note": "列表字段表头，帮助操作者理解结果列表的字段含义。",
+          "key": "LC_KVK_CAPTIVITY_SEARCH_POWER_HEADER",
+          "content": "Power",
+          "remark": "位置：结果列表表头。用途：战力字段名。"
+        },
+        {
+          "note": "列表字段表头，帮助操作者理解结果列表的字段含义。",
+          "key": "LC_KVK_CAPTIVITY_SEARCH_KILLS_HEADER",
+          "content": "Kills",
+          "remark": "位置：结果列表表头。用途：击杀字段名。"
+        },
+        {
+          "note": "查看按钮，用于查看当前目标的更多信息。",
+          "key": "LC_KVK_CAPTIVITY_SEARCH_VIEW_BUTTON",
+          "content": "VIEW",
+          "remark": "位置：列表右侧操作区。用途：查看目标详情。"
+        },
+        {
+          "note": "囚禁按钮，用于对当前目标执行囚禁操作。",
+          "key": "LC_KVK_CAPTIVITY_SEARCH_CAPTIVITY_BUTTON",
+          "content": "CAPTIVITY",
+          "remark": "位置：列表右侧操作区。用途：对目标发起囚禁。"
+        }
+      ]
+    },
+    {
+      "title": "囚禁名单-激活态",
+      "crop_name": "06_captivity_list.jpg",
+      "crop_box": [450, 5410, 1860, 6460],
+      "image_note": "【左侧放图】囚禁激活后，列表中出现已囚禁目标，并可通过头像或操作区执行查看、定位、解封等行为。该页的重点是功能按钮和时长展示格式。",
+      "rows": [
+        {
+          "note": "查看按钮，用于查看被囚禁目标的详细信息。",
+          "key": "LC_KVK_CAPTIVITY_LIST_VIEW_BUTTON",
+          "content": "VIEW",
+          "remark": "位置：头像点击后的操作浮层。用途：查看目标详情。"
+        },
+        {
+          "note": "定位按钮，用于直接跳转查看被囚禁目标的位置。",
+          "key": "LC_KVK_CAPTIVITY_LIST_POSITION_BUTTON",
+          "content": "POSITION",
+          "remark": "位置：头像点击后的操作浮层。用途：地图定位目标。"
+        },
+        {
+          "note": "解封按钮，用于解除当前被囚禁目标。",
+          "key": "LC_KVK_CAPTIVITY_LIST_UNBLOCK_BUTTON",
+          "content": "UNBLOCK",
+          "remark": "位置：头像点击后的操作浮层。用途：发起解封。"
+        },
+        {
+          "note": "新增按钮，用于在已存在囚禁目标时继续添加新的目标。",
+          "key": "LC_KVK_CAPTIVITY_LIST_ADD_BUTTON",
+          "content": "ADD",
+          "remark": "位置：页面底部主按钮。用途：继续添加囚禁目标。"
+        },
+        {
+          "note": "囚禁剩余时间展示格式，用于描述每个目标的剩余囚禁时长。",
+          "key": "LC_KVK_CAPTIVITY_LIST_REMAIN_DAY_FORMAT",
+          "content": "{RemainDays} DAY",
+          "remark": "位置：每个被囚禁目标卡片右侧。用途：展示剩余时长格式。"
+        },
+        {
+          "note": "列表底部倒计时展示格式，表示距离下一次可操作或自动结算的时间。",
+          "key": "LC_KVK_CAPTIVITY_LIST_BOTTOM_TIMER_FORMAT",
+          "content": "{RemainTime}",
+          "remark": "位置：ADD 按钮下方。用途：展示倒计时。当前样式示例为 2D22:22:13。"
+        }
+      ]
+    },
+    {
+      "title": "解封二次确认弹窗",
+      "crop_name": "07_select_state.jpg",
+      "crop_box": [280, 6600, 1860, 7670],
+      "image_note": "【左侧放图】解封操作后出现二次确认弹窗。由于 OCR 抓到的正文与流程语义不一致，本节只保留稳定可见的标题与按钮，并将正文标为待确认。",
+      "rows": [
+        {
+          "note": "确认弹窗标题，用于统一弹窗语义。",
+          "key": "LC_KVK_CAPTIVITY_UNBLOCK_POPUP_TITLE",
+          "content": "NOTICE",
+          "remark": "位置：弹窗顶部。用途：提示当前为确认型弹窗。"
+        },
+        {
+          "note": "解封确认正文，当前 OCR 结果与页面语义不匹配，需以原始设计稿或高清图二次确认。",
+          "key": "LC_KVK_CAPTIVITY_UNBLOCK_POPUP_DESC",
+          "content": "待确认",
+          "remark": "位置：弹窗正文区域。用途：提示解封后果或确认条件。"
+        },
+        {
+          "note": "确认按钮，用于继续执行解封。",
+          "key": "LC_KVK_CAPTIVITY_UNBLOCK_POPUP_CONFIRM_BUTTON",
+          "content": "CONFIRM",
+          "remark": "位置：弹窗底部左侧。用途：确认解封。"
+        },
+        {
+          "note": "取消按钮，用于放弃当前解封操作。",
+          "key": "LC_KVK_CAPTIVITY_UNBLOCK_POPUP_CANCEL_BUTTON",
+          "content": "CANCEL",
+          "remark": "位置：弹窗底部右侧。用途：取消解封。"
+        }
+      ]
+    },
+    {
+      "title": "KVK 大地图入口页",
+      "crop_name": "09_world_map_entry.jpg",
+      "crop_box": [500, 7810, 3400, 9215],
+      "image_note": "【左侧放图】被囚禁玩家点击进入 KVK 后展示大地图入口页。该页主要用于确认赛季标题、剩余时间格式和右侧功能入口文案。",
+      "rows": [
+        {
+          "note": "赛季上方副标题，用于标识当前赛季类型。",
+          "key": "LC_KVK_WORLD_SEASON_SUBTITLE",
+          "content": "CONQUER SEASON",
+          "remark": "位置：页面顶部主标题上方。用途：标识赛季类型。"
+        },
+        {
+          "note": "页面主标题，用于展示当前 KVK 主视觉场景名称。",
+          "key": "LC_KVK_WORLD_MAIN_TITLE",
+          "content": "MARCH OF THE AGES",
+          "remark": "位置：页面顶部居中。用途：标识当前主页面名称。"
+        },
+        {
+          "note": "剩余时间展示格式，用于提示当前赛季或活动剩余时间。",
+          "key": "LC_KVK_WORLD_REMAIN_TIME_FORMAT",
+          "content": "Time remaining: {TimeRemaining}",
+          "remark": "位置：主标题下方。用途：展示倒计时。"
+        },
+        {
+          "note": "右侧入口按钮文案之一，用于进入要塞相关内容。",
+          "key": "LC_KVK_WORLD_FORTRESS_BUTTON",
+          "content": "Fortress",
+          "remark": "位置：页面右侧竖排入口。用途：进入 Fortress 模块。"
+        },
+        {
+          "note": "右侧入口按钮文案之一，用于进入村庄相关内容。",
+          "key": "LC_KVK_WORLD_VILLAGES_BUTTON",
+          "content": "Villages",
+          "remark": "位置：页面右侧竖排入口。用途：进入 Villages 模块。"
+        },
+        {
+          "note": "右侧入口按钮文案之一，用于进入商店相关内容。",
+          "key": "LC_KVK_WORLD_SHOP_BUTTON",
+          "content": "Shop",
+          "remark": "位置：页面右侧竖排入口。用途：进入 Shop 模块。"
+        },
+        {
+          "note": "右侧入口按钮文案之一，用于进入 Brave Souls 模块。",
+          "key": "LC_KVK_WORLD_BRAVE_SOULS_BUTTON",
+          "content": "Brave Souls",
+          "remark": "位置：页面右侧竖排入口。用途：进入 Brave Souls 模块。"
+        },
+        {
+          "note": "右侧入口按钮文案之一，用于进入天赋模块。",
+          "key": "LC_KVK_WORLD_TALENT_BUTTON",
+          "content": "Talent",
+          "remark": "位置：页面右侧竖排入口。用途：进入 Talent 模块。"
+        }
+      ]
+    }
+  ]
+}

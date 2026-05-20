@@ -1,0 +1,35 @@
+{
+  "name": "default-review-template",
+  "description": "Semantic review style defaults for imported Feishu Sheets.",
+  "xlsx": {
+    "import_type": "sheet",
+    "apply_template_after_import": true,
+    "cleanup_uploaded_source_by_default": true
+  },
+  "visual_hierarchy": {
+    "overview_title": {
+      "background": "#D9EAF7",
+      "bold": true
+    },
+    "section_title": {
+      "background": "#D9EAF7",
+      "bold": true
+    },
+    "right_header": {
+      "background": "#7030A0",
+      "foreground": "#FFFFFF",
+      "bold": true
+    }
+  },
+  "semantic_groups": [
+    "overview",
+    "left_visual",
+    "middle_notes",
+    "right_key_content_remark"
+  ],
+  "future_input_adapters": {
+    "html": "reserved",
+    "doc": "reserved",
+    "docx": "reserved"
+  }
+}

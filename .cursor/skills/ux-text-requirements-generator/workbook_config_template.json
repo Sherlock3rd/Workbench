@@ -1,0 +1,56 @@
+{
+  "source_image": "D:\\path\\to\\prototype.png",
+  "source_coordinate_size": [
+    1024,
+    4096
+  ],
+  "output_path": "output\\ux_text_requirements.xlsx",
+  "sheet_title": "UxTextRequirements",
+  "crop_dir_name": "ux_requirement_crops",
+  "auto_image_width": true,
+  "max_image_width": 560,
+  "min_image_width": 360,
+  "pixels_per_row": 20,
+  "image_padding_rows": 2,
+  "overview_title": "UI结构总览",
+  "overview_note": "本页先从 UI 策划视角概览整套功能界面结构，再进入后续逐页截图与文本需求，方便文案策划先理解页面职责、状态关系和阅读顺序。",
+  "overview_rows": [
+    {
+      "module": "1. 入口与基础认知",
+      "pages": "入口页；主页基础态；主页功能展开态",
+      "notes": "用于先建立功能入口、主界面职责和基础信息阅读顺序。"
+    },
+    {
+      "module": "2. 主操作流",
+      "pages": "确认弹窗；结果反馈页；详情页",
+      "notes": "按玩家从点击到反馈的顺序组织章节，方便逐页补文案。"
+    }
+  ],
+  "sections": [
+    {
+      "title": "示例页面-基础态",
+      "crop_box": [
+        120,
+        180,
+        420,
+        760
+      ],
+      "crop_name": "page_01_base.png",
+      "image_note": "【左侧放图】该页为功能主页基础态，玩家进入后先看到核心信息和主操作入口。",
+      "rows": [
+        {
+          "note": "1. 页面主标题，玩家进入页面后首先确认当前所在功能。",
+          "key": "LC_SYSTEM_PAGE_MAIN_TITLE",
+          "content": "待确认",
+          "remark": "位置：页面顶部居中。用途：标识当前功能页名称。"
+        },
+        {
+          "note": "2. 主操作按钮文案，用于引导玩家进入下一步核心流程。",
+          "key": "LC_SYSTEM_PAGE_CONFIRM_BUTTON",
+          "content": "待确认",
+          "remark": "位置：页面底部主按钮。用途：承接当前页面的核心点击操作。"
+        }
+      ]
+    }
+  ]
+}

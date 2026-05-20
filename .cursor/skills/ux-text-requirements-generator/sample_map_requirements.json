@@ -1,0 +1,57 @@
+[
+  {
+    "page_name": "Map_Main",
+    "element_type": "label",
+    "element_name": "mode_label",
+    "key": "LC_MAP_MODE_COMMON_LABEL",
+    "content": "Common mode",
+    "trigger_or_state": "default state",
+    "source_region": "region_01",
+    "confidence": "high",
+    "notes": ""
+  },
+  {
+    "page_name": "Map_TrackingPopup",
+    "element_type": "popup_title",
+    "element_name": "tracking_title",
+    "key": "LC_MAP_TRACKING_POPUP_TITLE",
+    "content": "MARK LINE",
+    "trigger_or_state": "tracking popup open",
+    "source_region": "region_02",
+    "confidence": "medium",
+    "notes": "Popup wording should be checked against the latest source image."
+  },
+  {
+    "page_name": "Map_TrackingPopup",
+    "element_type": "button_secondary",
+    "element_name": "cancel_button",
+    "key": "LC_MAP_TRACKING_POPUP_CANCEL_BTN",
+    "content": "CANCEL TRACKING",
+    "trigger_or_state": "tracking popup open",
+    "source_region": "region_02",
+    "confidence": "medium",
+    "notes": "Button wording may vary in the final source."
+  },
+  {
+    "page_name": "Map_AreaPanel",
+    "element_type": "title",
+    "element_name": "area_panel_title",
+    "key": "LC_MAP_AREA_PANEL_TITLE",
+    "content": "AREA",
+    "trigger_or_state": "area list expanded",
+    "source_region": "region_03",
+    "confidence": "high",
+    "notes": ""
+  },
+  {
+    "page_name": "Map_ModeSwitchMenu",
+    "element_type": "menu_option",
+    "element_name": "exploration_mode_option",
+    "key": "LC_MAP_MODE_SWITCH_EXPLORATION_OPTION",
+    "content": "Exploration mode",
+    "trigger_or_state": "mode switch menu open",
+    "source_region": "region_04",
+    "confidence": "high",
+    "notes": ""
+  }
+]

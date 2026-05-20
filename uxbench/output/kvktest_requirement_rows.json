@@ -1,0 +1,188 @@
+[
+  {
+    "page_name": "王视角-国王技能页",
+    "key": "LC_KVK_KINGSKILL_PAGE_TITLE",
+    "content": "KING SKILL",
+    "remark": "位置：页面顶部居中。用途：标识技能总页。"
+  },
+  {
+    "page_name": "王视角-国王技能页",
+    "key": "LC_KVK_KINGSKILL_CAGE_NAME",
+    "content": "Cage",
+    "remark": "位置：技能列表第二项标题。用途：标识囚禁技能名称。"
+  },
+  {
+    "page_name": "王视角-国王技能页",
+    "key": "LC_KVK_KINGSKILL_CAGE_DESC",
+    "content": "Specify a city that cannot be moved within 30 minutes. (not available to the king of the union or other kingdoms)",
+    "remark": "位置：Cage 技能标题下方。用途：说明囚禁效果与限制。"
+  },
+  {
+    "page_name": "王视角-国王技能页",
+    "key": "LC_KVK_KINGSKILL_USE_BUTTON",
+    "content": "USE",
+    "remark": "位置：当前选中技能行右侧。用途：执行技能激活。"
+  },
+  {
+    "page_name": "囚禁名单-空态",
+    "key": "LC_KVK_CAPTIVITY_EMPTY_DESC",
+    "content": "There are currently no prisoners",
+    "remark": "位置：页面中部。用途：囚禁列表空态提示。"
+  },
+  {
+    "page_name": "囚禁名单-空态",
+    "key": "LC_KVK_CAPTIVITY_EMPTY_ADD_BUTTON",
+    "content": "ADD",
+    "remark": "位置：页面底部中间。用途：从空态发起新增操作。"
+  },
+  {
+    "page_name": "搜索总督并执行囚禁",
+    "key": "LC_KVK_CAPTIVITY_SEARCH_PAGE_TITLE",
+    "content": "SEARCH GOVERNOR",
+    "remark": "位置：列表页顶部。用途：标识搜索目标玩家页面。"
+  },
+  {
+    "page_name": "搜索总督并执行囚禁",
+    "key": "LC_KVK_CAPTIVITY_SEARCH_INPUT_HINT",
+    "content": "Input a governor name to search",
+    "remark": "位置：搜索输入框内。用途：提示输入搜索条件。"
+  },
+  {
+    "page_name": "搜索总督并执行囚禁",
+    "key": "LC_KVK_CAPTIVITY_SEARCH_NAME_HEADER",
+    "content": "Name",
+    "remark": "位置：结果列表表头。用途：目标名字字段名。"
+  },
+  {
+    "page_name": "搜索总督并执行囚禁",
+    "key": "LC_KVK_CAPTIVITY_SEARCH_POWER_HEADER",
+    "content": "Power",
+    "remark": "位置：结果列表表头。用途：战力字段名。"
+  },
+  {
+    "page_name": "搜索总督并执行囚禁",
+    "key": "LC_KVK_CAPTIVITY_SEARCH_KILLS_HEADER",
+    "content": "Kills",
+    "remark": "位置：结果列表表头。用途：击杀字段名。"
+  },
+  {
+    "page_name": "搜索总督并执行囚禁",
+    "key": "LC_KVK_CAPTIVITY_SEARCH_VIEW_BUTTON",
+    "content": "VIEW",
+    "remark": "位置：列表右侧操作区。用途：查看目标详情。"
+  },
+  {
+    "page_name": "搜索总督并执行囚禁",
+    "key": "LC_KVK_CAPTIVITY_SEARCH_CAPTIVITY_BUTTON",
+    "content": "CAPTIVITY",
+    "remark": "位置：列表右侧操作区。用途：对目标发起囚禁。"
+  },
+  {
+    "page_name": "囚禁名单-激活态",
+    "key": "LC_KVK_CAPTIVITY_LIST_VIEW_BUTTON",
+    "content": "VIEW",
+    "remark": "位置：头像点击后的操作浮层。用途：查看目标详情。"
+  },
+  {
+    "page_name": "囚禁名单-激活态",
+    "key": "LC_KVK_CAPTIVITY_LIST_POSITION_BUTTON",
+    "content": "POSITION",
+    "remark": "位置：头像点击后的操作浮层。用途：地图定位目标。"
+  },
+  {
+    "page_name": "囚禁名单-激活态",
+    "key": "LC_KVK_CAPTIVITY_LIST_UNBLOCK_BUTTON",
+    "content": "UNBLOCK",
+    "remark": "位置：头像点击后的操作浮层。用途：发起解封。"
+  },
+  {
+    "page_name": "囚禁名单-激活态",
+    "key": "LC_KVK_CAPTIVITY_LIST_ADD_BUTTON",
+    "content": "ADD",
+    "remark": "位置：页面底部主按钮。用途：继续添加囚禁目标。"
+  },
+  {
+    "page_name": "囚禁名单-激活态",
+    "key": "LC_KVK_CAPTIVITY_LIST_REMAIN_DAY_FORMAT",
+    "content": "{RemainDays} DAY",
+    "remark": "位置：每个被囚禁目标卡片右侧。用途：展示剩余时长格式。"
+  },
+  {
+    "page_name": "囚禁名单-激活态",
+    "key": "LC_KVK_CAPTIVITY_LIST_BOTTOM_TIMER_FORMAT",
+    "content": "{RemainTime}",
+    "remark": "位置：ADD 按钮下方。用途：展示倒计时。当前样式示例为 2D22:22:13。"
+  },
+  {
+    "page_name": "解封二次确认弹窗",
+    "key": "LC_KVK_CAPTIVITY_UNBLOCK_POPUP_TITLE",
+    "content": "NOTICE",
+    "remark": "位置：弹窗顶部。用途：提示当前为确认型弹窗。"
+  },
+  {
+    "page_name": "解封二次确认弹窗",
+    "key": "LC_KVK_CAPTIVITY_UNBLOCK_POPUP_DESC",
+    "content": "待确认",
+    "remark": "位置：弹窗正文区域。用途：提示解封后果或确认条件。"
+  },
+  {
+    "page_name": "解封二次确认弹窗",
+    "key": "LC_KVK_CAPTIVITY_UNBLOCK_POPUP_CONFIRM_BUTTON",
+    "content": "CONFIRM",
+    "remark": "位置：弹窗底部左侧。用途：确认解封。"
+  },
+  {
+    "page_name": "解封二次确认弹窗",
+    "key": "LC_KVK_CAPTIVITY_UNBLOCK_POPUP_CANCEL_BUTTON",
+    "content": "CANCEL",
+    "remark": "位置：弹窗底部右侧。用途：取消解封。"
+  },
+  {
+    "page_name": "KVK 大地图入口页",
+    "key": "LC_KVK_WORLD_SEASON_SUBTITLE",
+    "content": "CONQUER SEASON",
+    "remark": "位置：页面顶部主标题上方。用途：标识赛季类型。"
+  },
+  {
+    "page_name": "KVK 大地图入口页",
+    "key": "LC_KVK_WORLD_MAIN_TITLE",
+    "content": "MARCH OF THE AGES",
+    "remark": "位置：页面顶部居中。用途：标识当前主页面名称。"
+  },
+  {
+    "page_name": "KVK 大地图入口页",
+    "key": "LC_KVK_WORLD_REMAIN_TIME_FORMAT",
+    "content": "Time remaining: {TimeRemaining}",
+    "remark": "位置：主标题下方。用途：展示倒计时。"
+  },
+  {
+    "page_name": "KVK 大地图入口页",
+    "key": "LC_KVK_WORLD_FORTRESS_BUTTON",
+    "content": "Fortress",
+    "remark": "位置：页面右侧竖排入口。用途：进入 Fortress 模块。"
+  },
+  {
+    "page_name": "KVK 大地图入口页",
+    "key": "LC_KVK_WORLD_VILLAGES_BUTTON",
+    "content": "Villages",
+    "remark": "位置：页面右侧竖排入口。用途：进入 Villages 模块。"
+  },
+  {
+    "page_name": "KVK 大地图入口页",
+    "key": "LC_KVK_WORLD_SHOP_BUTTON",
+    "content": "Shop",
+    "remark": "位置：页面右侧竖排入口。用途：进入 Shop 模块。"
+  },
+  {
+    "page_name": "KVK 大地图入口页",
+    "key": "LC_KVK_WORLD_BRAVE_SOULS_BUTTON",
+    "content": "Brave Souls",
+    "remark": "位置：页面右侧竖排入口。用途：进入 Brave Souls 模块。"
+  },
+  {
+    "page_name": "KVK 大地图入口页",
+    "key": "LC_KVK_WORLD_TALENT_BUTTON",
+    "content": "Talent",
+    "remark": "位置：页面右侧竖排入口。用途：进入 Talent 模块。"
+  }
+]
