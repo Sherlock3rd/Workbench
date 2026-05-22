@@ -31,6 +31,7 @@
 | `ux-text-requirements-generator` | 已接入，首轮测试完成 | 已完成环境校验，并使用 `.cursor/skills/ux-text-requirements-generator/scripts/build_ux_requirement_workbook.py` 重新生成 Excel | 继续补样例表与规则文档，提升识别准确度 |
 | `planning-analytics-tracking` | 已接入，待实文档验证 | Cursor 项目级 Skill，读取飞书策划案并生成数据打点需求，优先尝试原生数据打点页签，不支持时回退为 `## 数据打点` 区块 | 使用真实策划案链接验证读取、页签调研、写回流程 |
 | `planning-audio-requirements` | 已接入，持续纠偏中 | Cursor 项目级 Skill，读取飞书策划案和相关页签，先输出策划必看，再整理音乐、音效、配音需求，并内置音频需求页签固定样式规范 | 继续用真实策划案验证音乐判定边界、音效判定边界、复合功能拆分、配音需求抽取与写回格式 |
+| `planning-announcement-requirements` | 已接入，ROK 已获文案认可 | Cursor 项目级 Skill，读取飞书策划案或详细方案，确认项目后生成面向玩家的版本公告文案；当前重点支持 ROK，COD/Beagle 仍需提供对应术语表和训练样本提升准确率 | 继续沉淀真实 ROK 案例；待 COD/Beagle 术语表和公告样本齐备后再扩展对应项目准确率 |
 
 ## 变更记录
 | 日期 | 事项 | 影响范围 | 备注 |
@@ -90,6 +91,13 @@
 | 2026-05-19 | 固化音频需求 Base 登记 SOP | `.cursor/skills/planning-audio-requirements/SKILL.md`、`session/session.md` | 将已跑通的 Base 登记流程写入 Skill：包含 7 日版本登记表 token/表 ID/视图 ID、字段映射、最小权限、人员字段 open_id 规则，以及 Windows 下用 Python 传 JSON 的写入方式 |
 | 2026-05-19 | 调整音频需求 Base 登记为二次确认 | `.cursor/skills/planning-audio-requirements/SKILL.md`、`session/session.md` | 将需求管理表登记从生成后同步写入改为生成完成后先询问用户是否需要添加；仅在用户二次确认后才写入 Base，未确认时不新增记录 |
 | 2026-05-19 | 重新生成联盟音频需求页签 | 飞书 `B6B4sUCt7hV4qktXqGacaiYqnCb` / `3Z0Mwg`、`session/session.md` | 按最新音频规则重写联盟 `音频需求` 页签；为 1 个音乐需求和 6 个音效需求补充详细方案来源的对应切图，移除 `策划补充提示`，并导出 xlsx 复查 7 张图片、行高和分区结构 |
+| 2026-05-20 | 修正联盟数据打点需求页签 | 飞书 `B6B4sUCt7hV4qktXqGacaiYqnCb` / `lpViU`、`session/session.md` | 移除误写入页签的结构选型说明，仅保留正式数据打点交付内容；按数据打点页签格式补充合并、标题/分区/表头样式、列宽与行高，并导出 xlsx 复查 |
+| 2026-05-21 | 新增公告需求生成 Skill | `.cursor/skills/planning-announcement-requirements/`、`README.md`、`session/session.md` | 固化读取策划详细方案生成玩家版本公告的流程；生成前确认 ROK/COD/Beagle 项目，首版接入 ROK 文案术语库和 ROK 版本公告内容表字段规则 |
+| 2026-05-21 | 细化活动类公告生成规则 | `.cursor/skills/planning-announcement-requirements/`、`session/session.md` | 根据付费追赶活动测试反馈，要求活动类公告必须读取背景、参与对象、开放节点、持续时间、参与次数、购买/兑换上限、奖励、商店解锁和限制例外；优化活动需用玩家视角解释为什么要改 |
+| 2026-05-21 | 增加规则说明型公告识别规则 | `.cursor/skills/planning-announcement-requirements/`、`session/session.md` | 根据装备冲刺可购买次数文案对比，新增规则说明型公告结构：背景原因、核心规则对象、关键定义、条件分支、计算公式、负向规则、共享/动态规则和移民/赛季限制 |
+| 2026-05-21 | 补充活动替代旧活动公告口径 | `.cursor/skills/planning-announcement-requirements/`、`session/session.md` | 根据“中期结算”文案反馈，新增活动若取消或替代旧活动，短版版本公告需优先写清新增活动、开放范围、替代关系、核心得分行为和奖励结算方式，避免展开成规则说明页 |
+| 2026-05-21 | 系统读取 ROK 历史公告润色口径 | `.cursor/skills/planning-announcement-requirements/`、`mistakes/announcement-reference-not-read.md`、`session/session.md` | 读取 ROK 版本公告内容表所有页签的润色相关列，修正 Skill 为必须读取 `reference.md`，并在 reference 中沉淀润色列权威优先级、常用句式、先锋体验、规则限制、外观装扮和国服/国际服差异写法 |
+| 2026-05-21 | 深读 ROK 1108-1092 公告样本 | `.cursor/skills/planning-announcement-requirements/reference.md`、`session/session.md` | 读取 1108 至 1092 页签 A:G 内容，对比公告内容、备注和润色差异，补充策划口语转公告口径、权限称谓、测试范围、术语纠偏、实际效果边界、版本范围、任务奖励替换和 AI 润色反例规则 |
 
 ## 提交总账
 - 当前仓库未启用 git，总账先记录在本文件中。
@@ -101,3 +109,4 @@
 3. 若要继续飞书目录自动化，补齐 `drive:drive` 或 `space:folder:create` 权限后重新授权。
 4. 用真实飞书策划案链接验证 `planning-analytics-tracking` 的读取、埋点生成与文档写回。
 5. 用真实飞书策划案链接继续验证 `planning-audio-requirements` 的音乐判定边界、音效判定边界、复合功能拆分、配音需求抽取和样式参考说明。
+6. 用真实 ROK 策划案验证 `planning-announcement-requirements` 的术语库读取、公告规模判断、代表截图选择和公告内容表写入流程。

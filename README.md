@@ -14,6 +14,7 @@
 | UX 文本需求 Skill | `.cursor/skills/ux-text-requirements-generator/` | 将 UX 原型图整理为可审阅、可继续编辑的文本需求文档，并支持环境检查、依赖安装和 Excel 导出。 |
 | 音频需求 Skill | `.cursor/skills/planning-audio-requirements/` | 读取飞书策划案或表格，整理音乐、音效、配音需求，并按音频需求页签样式输出。 |
 | 数据打点 Skill | `.cursor/skills/planning-analytics-tracking/` | 读取飞书策划案，先提炼数据问题，再生成事件表、字段和说明，支持写回数据打点区块或页签。 |
+| 公告需求 Skill | `.cursor/skills/planning-announcement-requirements/` | 读取飞书策划案或详细方案，确认项目并结合术语库生成面向玩家的版本公告文案；当前已重点支持 ROK，COD/Beagle 仍需补充术语表和训练样本。 |
 | 飞书 Sheet 导入 Skill | `.cursor/skills/feishu-sheet-importer/` | 将本地 `.xlsx` 导入飞书 Sheet，并尽量回放章节、表头、配色和图片等关键审阅样式。 |
 
 ## 快速开始
@@ -33,6 +34,7 @@ cd Workbench
    - 需要从 UX 图生成文本需求：使用 `.cursor/skills/ux-text-requirements-generator/`。
    - 需要整理音频需求：使用 `.cursor/skills/planning-audio-requirements/`。
    - 需要整理数据打点：使用 `.cursor/skills/planning-analytics-tracking/`。
+   - 需要生成版本公告或公告需求：使用 `.cursor/skills/planning-announcement-requirements/`。
    - 需要把本地 Excel 转飞书 Sheet：使用 `.cursor/skills/feishu-sheet-importer/`。
 
 ## 目录结构
