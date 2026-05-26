@@ -98,6 +98,7 @@
 | 2026-05-21 | 补充活动替代旧活动公告口径 | `.cursor/skills/planning-announcement-requirements/`、`session/session.md` | 根据“中期结算”文案反馈，新增活动若取消或替代旧活动，短版版本公告需优先写清新增活动、开放范围、替代关系、核心得分行为和奖励结算方式，避免展开成规则说明页 |
 | 2026-05-21 | 系统读取 ROK 历史公告润色口径 | `.cursor/skills/planning-announcement-requirements/`、`mistakes/announcement-reference-not-read.md`、`session/session.md` | 读取 ROK 版本公告内容表所有页签的润色相关列，修正 Skill 为必须读取 `reference.md`，并在 reference 中沉淀润色列权威优先级、常用句式、先锋体验、规则限制、外观装扮和国服/国际服差异写法 |
 | 2026-05-21 | 深读 ROK 1108-1092 公告样本 | `.cursor/skills/planning-announcement-requirements/reference.md`、`session/session.md` | 读取 1108 至 1092 页签 A:G 内容，对比公告内容、备注和润色差异，补充策划口语转公告口径、权限称谓、测试范围、术语纠偏、实际效果边界、版本范围、任务奖励替换和 AI 润色反例规则 |
+| 2026-05-26 | 纠偏数据打点页签写入漏格式 | `.cursor/skills/planning-analytics-tracking/SKILL.md`、`mistakes/data-tracking-sheet-format-missed.md`、`session/session.md` | 将飞书电子表格数据打点写回的完成标准改为内容写入、格式应用、内容复查、合并/元数据复查和导出 xlsx 视觉复查；禁止只用 `sheets +read` 判定交付完成 |
 
 ## 提交总账
 - 当前仓库未启用 git，总账先记录在本文件中。
