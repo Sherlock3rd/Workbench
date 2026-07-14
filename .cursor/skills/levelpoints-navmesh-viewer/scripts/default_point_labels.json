@@ -1,0 +1,11 @@
+{
+  "className": {
+    "NpcPoint": "NPC",
+    "TeamPoint": "Team",
+    "PetMonsterPoint": "PetMonster",
+    "InteractiveObjPoint": "InteractiveObj"
+  },
+  "objId": {},
+  "objType": {},
+  "prefabContains": []
+}

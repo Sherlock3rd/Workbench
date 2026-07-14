@@ -30,6 +30,7 @@ token.json
 .cursor/cache/
 .cursor/skills/**/tmp/
 .cursor/skills/**/output/
+.worktrees/
 
 # Local generated review files
 *.xlsx
@@ -50,3 +51,18 @@ desktop.ini
 logs/
 tmp/
 temp/
+
+# Electron packaged outputs
+tools/levelpoints-electron-viewer/dist/
+tools/levelpoints-electron-viewer/dist-final/
+tools/levelpoints-electron-viewer/dist-diagnostic/
+tools/levelpoints-electron-viewer/dist-stable/
+tools/levelpoints-electron-viewer/dist-stable2/
+tools/levelpoints-electron-viewer/dist-layout/
+tools/levelpoints-electron-viewer/dist-refreshfix/
+tools/levelpoints-electron-viewer/helper-build/
+tools/levelpoints-electron-viewer/helper-dist/
+
+# Local gameplay recordings
+asset/recordings/*
+!asset/recordings/README.md

@@ -1,0 +1,4 @@
+interface:
+  display_name: "NavMesh Point Visualizer"
+  short_description: "Generate navmesh and level point HTML previews with validation."
+  default_prompt: "生成 navmesh 与关卡点位预览 HTML，并检查点位是否越界或落在孤立区域。"

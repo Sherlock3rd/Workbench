@@ -1,0 +1,7 @@
+name: levelpoints-navmesh-viewer
+description: Visualize Beagle LevelPoints.json on NavMesh and inspect source indexes, point layers, and navmesh partitions.
+prompt: |
+  Use the levelpoints-navmesh-viewer skill.
+  Read the skill instructions before acting.
+  Preserve raw game data meanings: do not rename ObjID or ObjType to business labels such as parking or mining unless the user confirms the mapping.
+  Generate an HTML preview that can display source components[] indexes and reload user-selected local source files through browser file pickers.

@@ -1,0 +1,4 @@
+name: levelpoints-html-editor-writeback
+version: 1
+description: Edit Beagle Unity LevelPoints in HTML and write changes back to Unity-readable JSON.
+model: gpt-5.5

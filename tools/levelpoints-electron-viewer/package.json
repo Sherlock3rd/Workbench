@@ -1,0 +1,59 @@
+{
+  "name": "levelpoints-electron-viewer",
+  "version": "0.1.0",
+  "description": "Beagle Map LevelPoints desktop viewer.",
+  "author": "Workbench",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win portable"
+  },
+  "build": {
+    "appId": "com.beagle.maplp",
+    "productName": "Beagle_MapLP",
+    "directories": {
+      "output": "dist-final"
+    },
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "ERROR_CODES.md",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "../../.cursor/skills/levelpoints-navmesh-viewer/scripts",
+        "to": "viewer-scripts",
+        "filter": [
+          "analyze_levelpoints_against_navmesh.py",
+          "visualize_levelpoints_navmesh.py",
+          "default_point_labels.json",
+          "viewer-top-banner.png"
+        ]
+      },
+      {
+        "from": "helper-dist",
+        "to": "helper",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "win": {
+      "signAndEditExecutable": false,
+      "icon": "assets/icon.ico",
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    }
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.0.0"
+  }
+}

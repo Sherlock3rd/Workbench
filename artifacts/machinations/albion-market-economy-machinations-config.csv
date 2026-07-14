@@ -1,0 +1,16 @@
+key,display_name,system_area,node_or_edge_id,value,unit,source_type,source_ref,confidence,min_value,max_value,default_value,notes,review_status
+market_transaction_tax_premium,Premium 交易税,market,node_market_tax,4,percent,wiki,Albion Wiki Marketplace / Margin,95,0,20,4,Premium 角色成交税；成交时收取,confirmed
+market_transaction_tax_non_premium,非 Premium 交易税,market,node_market_tax,8,percent,wiki,Albion Wiki Marketplace / Margin,95,0,20,8,非 Premium 角色成交税；成交时收取,confirmed
+market_setup_fee,买卖订单创建费,market,node_market_tax,2.5,percent,wiki,Albion Wiki Marketplace / Margin,95,0,10,2.5,创建 Buy Order 或 Sell Order 时收取；取消不返还,confirmed
+sell_order_duration_days,市场订单有效期,market,node_local_market,30,days,wiki,Albion Wiki Marketplace,90,1,60,30,订单未成交会过期并进入 Completed Transactions,confirmed
+completed_transaction_retention_days,Completed Transactions 保留期,market,node_local_market,60,days,wiki,Albion Wiki Marketplace,90,1,120,60,未领取物品超过保留期会被删除,confirmed
+focus_recharge_daily,Premium Focus 日恢复,crafting,node_crafting,10000,points_per_day,official,Albion Online official crafting guide,90,0,20000,10000,Premium Focus 每日恢复；影响制作资源返还效率,confirmed
+crafting_station_fee,制作站费用,crafting,node_crafting,,silver_or_percent,official,Albion Online official crafting guide,70,0,,,"城市玩家站通常收取 crafting fee；具体值由站点/玩家设置，需要实测",needs_review
+pvp_item_destroy_rate,PvP 装备破坏率,pvp,node_pvp_consumption,,percent,assumption,Needs combat/death data,45,0,100,,"PvP 死亡后装备有破坏/掉落/回收等不同结果；需要更具体数据",assumption
+black_market_demand_rate,黑市买单需求生成速率,black_market,node_black_market,,orders_per_pve_activity,official,Albion official Black Market feature / Wiki Black Market,70,0,,,"PvE 击杀和开箱会拉动黑市买单，但公开资料未给出精确速率",needs_review
+black_market_trash_share,黑市低阶装备销毁比例,black_market,node_black_market,,percent,wiki,Albion Wiki Black Market,60,0,100,,"Wiki 说明黑市会 trash 一部分低阶装备，但未给出比例",needs_review
+transport_loss_risk,跨城运输损失风险,transport,node_transport_risk,,risk_score,assumption,Needs route and PvP zone data,50,0,100,,"用于建模跨城套利门槛；应按路线、区域和货值估算",assumption
+local_price_gap_threshold,跨城套利最低价差阈值,market,edge_transport_to_market,,percent,assumption,Derived from tax fee and transport risk,55,0,100,,"至少需要覆盖订单费、成交税、运输时间和死亡风险",assumption
+guild_stock_buffer_days,公会装备库存缓冲天数,guild,node_guild_stock,,days,assumption,Needs guild logistics data,45,0,30,,"用于估算公会维持持续战斗的后勤储备强度",assumption
+war_frequency,公会战斗频率,guild,node_guild_division,,events_per_week,assumption,Needs guild activity data,45,0,,,"战斗频率越高，装备消耗和后勤分工越强",assumption
+organization_efficiency,公会组织效率,guild,edge_guild_division_to_supply,,multiplier,assumption,Model parameter,40,0,5,,"表示分工对补给效率、库存周转和市场采购效率的提升",assumption

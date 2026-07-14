@@ -1,0 +1,7 @@
+interface:
+  display_name: "飞书会议纪要邮件草稿"
+  short_description: "根据会议关键词生成飞书会议纪要邮件草稿。"
+  default_prompt: "使用 $feishu-meeting-minutes-email-draft 生成会议纪要邮件草稿。会议关键词：；模板邮件名（可空）："
+
+policy:
+  allow_implicit_invocation: true
