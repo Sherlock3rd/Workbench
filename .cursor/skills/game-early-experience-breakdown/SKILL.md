@@ -39,10 +39,14 @@ description: Use when the user provides a game recording or asks for 前期体�
 
 ## 固定分析规则
 
-- 使用左闭右开时间片：`0-30m` 每 1m，`30-60m` 每 5m，`1h+` 每 10m；尾片保留实际时长。
+- 分析层必须生成密集审阅时间点：`0-10m` 每 1 秒、`10-20m` 每 5 秒、`20m+`
+  每 10 秒。密集审阅用于发现剧情、系统和反馈事件，不能因最终页面按分钟展示而省略。
+- 展示层继续使用左闭右开时间片：`0-30m` 每 1m，`30-60m` 每 5m，`1h+`
+  每 10m；尾片保留实际时长。HTML 与曲线只展示该层，不渲染数千个分析点。
 - 每片主截图默认取中点。若中点无信息，例如纯黑、纯白或白屏/迷雾过场，则改选片内距离中点最近的
   临近有效帧，并在 `main_frame.selection_reason` 写入 `midpoint_uninformative`；60 秒片最多偏移 10 秒，
-  更长片最多偏移片长 10% 且不超过 30 秒，不能为画面更美观随意偏移。
+  更长片最多偏移片长 10% 且不超过 30 秒，不能为画面更美观随意偏移。主图只负责展示，
+  不能代替密集审阅或关键片段连续回看。
 - 关键转折补 1-3 张证据图。触发项包括：任务/阶段切换、系统首次开放、地图区域变化、
   经济获得或消耗、剧情冲突/过场/对话、失败/等待/难度突变、高潮、低谷、心流高点。
 - 必须查看全部主截图；截图不足以辨认动作、音频、字幕、过场、对话或上下文时，查看必要原视频片段。
@@ -128,19 +132,21 @@ description: Use when the user provides a game recording or asks for 前期体�
 
 所有命令从本 Skill 目录执行；路径含空格时加引号。
 
-1. 生成时间片：
+1. 生成展示时间片与密集审阅时间点：
 
    ```powershell
    py -3 scripts/video_timeline.py "<video>" --output "<work>/timeline.json"
    ```
 
-2. 首轮按中点抽帧：
+2. 首轮按中点抽展示帧；同时按 `review_points` 生成审阅索引或接触表：
 
    ```powershell
    py -3 scripts/extract_frames.py "<video>" --output-dir "<work>/frames" --mapping-output "<work>/frames.json"
    ```
 
-3. 人工或具备视觉能力的模型观看全部截图与必要原视频，记录关键转折。需要补图时生成
+3. 人工或具备视觉能力的模型观看全部密集审阅帧、展示主图与必要原视频，记录关键转折。
+   发现对话、CG、倒地、死亡、离别、牺牲、身份揭示、重大胜利或章节转场时，必须连续查看
+   候选点前后原视频，并以 0.5～1 秒精度确定事件。需要补图时生成
    `evidence-times.json`，格式为 `{"evidence_times":{"<slice_index>":[<absolute_seconds>]}}`，
    再用 `--evidence-config` 重跑 `extract_frames.py`。依据 [reference.md](reference.md)
    形成 `<work>/analysis.json`，并为每个现有时间片补齐情绪强度、体验强度及结构化评分依据。
@@ -160,11 +166,16 @@ description: Use when the user provides a game recording or asks for 前期体�
 6. 构建固定本地包：
 
    ```powershell
-   py -3 scripts/build_viewer.py "<work>/analysis.json" --output-dir "<output>/viewer"
+   py -3 scripts/build_viewer.py "<work>/analysis.json" --output-dir "<output>/viewer" --dataset-id "<game-slug>" --dataset-name "<显示名>"
    ```
 
-   固定交付为 `viewer/index.html`、`viewer/data.json`、`viewer/screenshots/`，不另造第二份分析数据。
-   若通过 `file://` 打开导致浏览器限制 `fetch`，使用页面文件选择器加载同目录 `data.json`。
+   多个拆解默认共用一个查看器，固定交付为 `viewer/index.html`、
+   `viewer/data/datasets.json`、`viewer/data/<game-slug>.json`、
+   `viewer/screenshots/<game-slug>/`。构建时用 `--dataset-name "<显示名>"` 写入清单。
+   每个拆解只能读取自己的 JSON 和截图目录，不得把不同游戏写入同一个数据文件。
+   标题区“拆解项目”下拉框读取清单并通过 `?dataset=<game-slug>` 切换；无参数时读取构建时指定的数据文件。
+   同一输出目录再次用新的 `--dataset-id` 构建时必须保留已有数据集，只替换当前同名数据集。
+   若通过 `file://` 打开导致浏览器限制 `fetch`，使用页面文件选择器加载对应的独立 JSON。
 
 7. `dry-run` 前必须通过 `sheets +info`/metadata 只读预检目标和同名冲突。使用脚本预检：
 
@@ -196,7 +207,8 @@ description: Use when the user provides a game recording or asks for 前期体�
 
 - `analysis_model.py` 校验通过；时间片连续覆盖全视频，主图、证据图存在且可打开。
 - 已查看全部主截图及必要原视频片段；无需线性观看无信息片段。
-- 已抽查 `viewer/index.html` 能加载 `data.json`，全局情绪与体验曲线、趋势摘要、图例开关、
+- 已抽查共享 `viewer/index.html` 能通过标题区下拉框切换全部清单数据集，页面不存在关键词筛选，
+  每个数据集只能加载自己的 JSON 和截图；全局情绪与体验曲线、趋势摘要、图例开关、
   全高命中带联动、时间轴、筛选、七维、证据图、详情关联 LOOP 跳转、LOOP 去重统计与页面末尾流程可用；
   LOOP 区不存在悬浮窗。
 - 飞书新页签标题正确，七维及剧情标记完整；内容回读、合并元数据检查、xlsx 导出样式复核均通过。

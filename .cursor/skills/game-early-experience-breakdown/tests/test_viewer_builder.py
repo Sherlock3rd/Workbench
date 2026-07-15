@@ -70,6 +70,86 @@ class ViewerBuilderTests(unittest.TestCase):
             self.assertTrue((output / "screenshots").is_dir())
             self.assertFalse(any(path.name.startswith(".viewer-build-") for path in root.iterdir()))
 
+    def test_named_dataset_build_isolated_data_and_screenshot_paths(self):
+        with tempfile.TemporaryDirectory(prefix="独立数据-") as directory:
+            root = Path(directory)
+            analysis, _ = self.make_input(root)
+            output = root / "viewer"
+
+            build_viewer.build_package(analysis, output, dataset_id="sanbing")
+
+            data_path = output / "data" / "sanbing.json"
+            self.assertTrue(data_path.is_file())
+            self.assertFalse((output / "data.json").exists())
+            written = json.loads(data_path.read_text(encoding="utf-8"))
+            self.assertTrue(
+                written["slices"][0]["main_frame"]["path"].startswith(
+                    "screenshots/sanbing/"
+                )
+            )
+            self.assertTrue((output / "screenshots" / "sanbing").is_dir())
+            index = (output / "index.html").read_text(encoding="utf-8")
+            self.assertIn(
+                '<meta name="analysis-data-file" content="data/sanbing.json">',
+                index,
+            )
+
+    def test_named_dataset_rejects_unsafe_identifier(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            analysis, _ = self.make_input(root)
+
+            with self.assertRaisesRegex(ValueError, "dataset|数据集"):
+                build_viewer.build_package(
+                    analysis, root / "viewer", dataset_id="../shared"
+                )
+
+    def test_named_dataset_build_preserves_existing_isolated_datasets(self):
+        with tempfile.TemporaryDirectory(prefix="共享查看器-") as directory:
+            root = Path(directory)
+            frost_analysis, _ = self.make_input(root / "frost")
+            sanbing_analysis, _ = self.make_input(root / "sanbing")
+            output = root / "viewer"
+
+            build_viewer.build_package(
+                frost_analysis, output, dataset_id="frost", dataset_name="寒霜"
+            )
+            build_viewer.build_package(
+                sanbing_analysis, output, dataset_id="sanbing", dataset_name="三冰"
+            )
+
+            self.assertTrue((output / "data" / "frost.json").is_file())
+            self.assertTrue((output / "data" / "sanbing.json").is_file())
+            self.assertTrue((output / "screenshots" / "frost").is_dir())
+            self.assertTrue((output / "screenshots" / "sanbing").is_dir())
+            manifest = json.loads(
+                (output / "data" / "datasets.json").read_text(encoding="utf-8")
+            )
+            self.assertEqual(
+                [
+                    {"id": "frost", "label": "寒霜"},
+                    {"id": "sanbing", "label": "三冰"},
+                ],
+                manifest["datasets"],
+            )
+
+            build_viewer.build_package(
+                frost_analysis,
+                output,
+                dataset_id="frost",
+                dataset_name="寒霜重评",
+            )
+            updated = json.loads(
+                (output / "data" / "datasets.json").read_text(encoding="utf-8")
+            )
+            self.assertEqual(
+                [
+                    {"id": "frost", "label": "寒霜重评"},
+                    {"id": "sanbing", "label": "三冰"},
+                ],
+                updated["datasets"],
+            )
+
     def test_data_json_is_normalized_input_with_rebased_image_paths(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -374,6 +454,16 @@ class ViewerBuilderTests(unittest.TestCase):
         ):
             self.assertNotIn(obsolete, combined)
         self.assertIn("narrative", combined)
+
+    def test_shared_viewer_has_header_dataset_switch_and_no_keyword_filter(self):
+        html = (ROOT / "assets" / "viewer.html").read_text(encoding="utf-8")
+        script = (ROOT / "assets" / "viewer.js").read_text(encoding="utf-8")
+        combined = html + script
+        self.assertIn('id="dataset-switch"', html)
+        self.assertIn("拆解项目", html)
+        self.assertIn("data/datasets.json", script)
+        self.assertNotIn('id="keyword-filter"', combined)
+        self.assertNotIn("sliceSearchText", script)
         self.assertIn("flow", combined)
         self.assertNotIn("综合情绪值", combined)
         self.assertNotIn("维度分 × 维度权重", combined)
@@ -1180,7 +1270,7 @@ class ViewerJavascriptBehaviorTests(unittest.TestCase):
             stages[0]["goals"],
         )
 
-    def test_filter_detail_tabs_and_lightbox_pure_behaviors(self):
+    def test_stage_highlight_filter_detail_tabs_and_lightbox_pure_behaviors(self):
         slice_data = {
                 "start": 60,
                 "end": 120,
@@ -1207,8 +1297,8 @@ class ViewerJavascriptBehaviorTests(unittest.TestCase):
         encoded = json.dumps(slice_data, ensure_ascii=False)
         result = self.run_node(
             "({"
-            f"match:viewer.matchesSlice({encoded},{{keyword:'冲突',stage:'教学',highlight:'climax'}}),"
-            f"miss:viewer.matchesSlice({encoded},{{keyword:'经济',stage:'',highlight:''}}),"
+            f"match:viewer.matchesSlice({encoded},{{stage:'教学',highlight:'climax'}}),"
+            f"miss:viewer.matchesSlice({encoded},{{stage:'探索',highlight:''}}),"
             f"detail:viewer.detailViewModel({encoded},'剧情轴'),"
             f"tabs:viewer.dimensionTabs({encoded},'剧情轴'),"
             f"lightbox:viewer.lightboxViewModel({encoded}.main_frame)"
@@ -1320,6 +1410,52 @@ class ViewerJavascriptBehaviorTests(unittest.TestCase):
             ")"
         )
         self.assertEqual({"hidden": False, "message": "file blocked"}, visible)
+
+    def test_dataset_query_selects_isolated_json_without_path_injection(self):
+        result = self.run_node(
+            "({"
+            "selected:viewer.resolveAnalysisDataPath('?dataset=sanbing','data/frost.json'),"
+            "fallback:viewer.resolveAnalysisDataPath('','data/frost.json'),"
+            "unsafe:viewer.resolveAnalysisDataPath('?dataset=../secret','data/frost.json')"
+            "})"
+        )
+        self.assertEqual(
+            {
+                "selected": "data/sanbing.json",
+                "fallback": "data/frost.json",
+                "unsafe": "data/frost.json",
+            },
+            result,
+        )
+
+    def test_dataset_manifest_and_switch_target_are_safe_and_deduplicated(self):
+        manifest = {
+            "datasets": [
+                {"id": "frost", "label": "寒霜"},
+                {"id": "../secret", "label": "非法"},
+                {"id": "frost", "label": "重复"},
+                {"id": "sanbing", "label": "三冰"},
+            ]
+        }
+        result = self.run_node(
+            "({"
+            f"items:viewer.normalizeDatasetManifest({json.dumps(manifest, ensure_ascii=False)},'frost'),"
+            "target:viewer.datasetSwitchTarget('https://example.test/index.html?dataset=frost#top','sanbing'),"
+            "unsafe:viewer.datasetSwitchTarget('https://example.test/index.html','../secret')"
+            "})"
+        )
+        self.assertEqual(
+            [
+                {"id": "frost", "label": "寒霜"},
+                {"id": "sanbing", "label": "三冰"},
+            ],
+            result["items"],
+        )
+        self.assertEqual(
+            "https://example.test/index.html?dataset=sanbing#top",
+            result["target"],
+        )
+        self.assertEqual("", result["unsafe"])
 
     def test_image_markup_has_visible_load_failure_fallback(self):
         markup = self.run_node(

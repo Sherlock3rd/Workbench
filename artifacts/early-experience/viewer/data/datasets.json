@@ -1,0 +1,16 @@
+{
+  "datasets": [
+    {
+      "id": "frost",
+      "label": "寒霜"
+    },
+    {
+      "id": "sanbing",
+      "label": "三冰"
+    },
+    {
+      "id": "dark-war",
+      "label": "Dark War"
+    }
+  ]
+}
